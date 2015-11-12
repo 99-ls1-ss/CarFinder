@@ -72,9 +72,9 @@ namespace CarFinder.Models {
             return await this.Database.SqlQuery<Car>("Cars_by_Year_Make_Model_Trim @model_year, @make, @model_name, @model_trim", yearParam, makeParam, modelParam, trimParam).ToListAsync();
         }
 
-        public async Task<List<Car>> Cars_by_Id(string id) {
+        public async Task<List<Car>> Cars_by_Id(int id) {
             var idParam = new SqlParameter("@Id", id);
-            return await this.Database.SqlQuery<Car>("Cars_by_Id @model_year", idParam).ToListAsync();
+            return await this.Database.SqlQuery<Car>("Cars_by_Id @Id", idParam).ToListAsync();
         }
 
         public static ApplicationDbContext Create() {

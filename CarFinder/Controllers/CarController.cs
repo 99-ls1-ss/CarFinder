@@ -1,4 +1,6 @@
-﻿using CarFinder.Models;
+﻿using Bing;
+using CarFinder.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,8 +64,54 @@ namespace CarFinder.Controllers {
 
         [Route("CarById")]
         [HttpGet]
-        public async Task<List<Car>> Cars_by_Id(string id) {
-            return await db.Cars_by_Id(id);
+        public async Task<IHttpActionResult> Cars_by_Id(int id) {
+
+            var car = db.Car.Find(id);
+
+            if(car==null){
+                return await Task.FromResult(NotFound());
+            }
+
+            var client = new BingSearchContainer(new Uri("https://api.datamarket.azure.com/Bing/search/"));
+            client.Credentials = new NetworkCredential("accountKey", "o+nYHPyZpmhku+bXtDn0AFRZ79Jnxd4KS/QkoHd3B3E");
+            var marketData = client.Composite(
+                "image",
+                car.model_year + car.make + car.model_name + car.model_trim,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+                ).Execute();
+
+            var result = marketData.FirstOrDefault();
+            var image = result != null ? result.Image : null;
+            var firstImage = image != null ? image.FirstOrDefault() : null;
+            var imageUrl = firstImage != null ? firstImage.MediaUrl : "~/Images/img_not_found.jpg";
+
+            dynamic recalls;
+
+            using (var httpClient = new HttpClient()) {
+                httpClient.BaseAddress = new Uri("http://www.nhtsa.gov/");
+
+                try {
+                    var response = await httpClient.GetAsync("webapi/api/Recalls/vehicle/modelyear/" + car.model_year + "/make/" + car.make + "/model/" + car.model_name + "?format=json");
+                    recalls = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+                }
+                catch(Exception e) {
+                    return InternalServerError(e);
+                }
+            }
+
+            return Ok(new { car, imageUrl, recalls });
         }
     }
 }
