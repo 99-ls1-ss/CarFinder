@@ -72,6 +72,23 @@ namespace CarFinder.Models {
             return await this.Database.SqlQuery<Car>("Cars_by_Year_Make_Model_Trim @model_year, @make, @model_name, @model_trim", yearParam, makeParam, modelParam, trimParam).ToListAsync();
         }
 
+        public async Task<List<Car>> FindCars(string year, string make, string model, string trim, string filter, bool? paging, int? page, int? perPage, string sortColumn, string sortDirection) {
+            var yearParam = new SqlParameter("@model_year", year);
+            var makeParam = new SqlParameter("@make", make ?? "");
+            var modelParam = new SqlParameter("@model_name", model ?? "");
+            var trimParam = new SqlParameter("@model_trim", trim ?? "");
+            var filterParam = new SqlParameter("@filter", filter ?? "");
+            var pagingParam = new SqlParameter("@paging", paging ?? false);
+            var pageParam = new SqlParameter("@page", page ?? 1);
+            var perPageParam = new SqlParameter("@perPage", perPage ?? 50);
+            var sortColumnParam = new SqlParameter("@sortColumn", sortColumn ?? "");
+            var sortDirectionParam = new SqlParameter("@sortDirection", sortDirection ?? "asc");
+
+            return await this.Database.SqlQuery<Car>(
+                "FindCars @model_year, @make, @model_name, @model_trim, @filter, @paging, @page, @perPage, @sortColumn, @sortDirection", 
+                yearParam, makeParam, modelParam, trimParam, filterParam, pagingParam, pageParam, perPageParam, sortColumnParam, sortDirectionParam).ToListAsync();
+        }
+
         public async Task<List<Car>> Cars_by_Id(int id) {
             var idParam = new SqlParameter("@Id", id);
             return await this.Database.SqlQuery<Car>("Cars_by_Id @Id", idParam).ToListAsync();

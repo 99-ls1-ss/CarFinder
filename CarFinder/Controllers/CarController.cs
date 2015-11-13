@@ -113,5 +113,12 @@ namespace CarFinder.Controllers {
 
             return Ok(new { car, imageUrl, recalls });
         }
+
+        [Route("FindCars")]
+        [HttpGet]
+        public async Task<IHttpActionResult> FindCars(string year, string make, string model, string trim, string filter, bool? paging, int? page, int? perPage, string sortColumn, string sortDirection) {
+            return Ok(await db.FindCars(year, make, model, trim, filter, paging, page, perPage, sortColumn, sortDirection));
+        }
+
     }
 }
