@@ -113,7 +113,20 @@ namespace CarFinder.Controllers {
 
             return Ok(new { car, imageUrl, recalls });
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="make"></param>
+        /// <param name="model"></param>
+        /// <param name="trim"></param>
+        /// <param name="filter"></param>
+        /// <param name="paging"></param>
+        /// <param name="page"></param>
+        /// <param name="perPage"></param>
+        /// <param name="sortColumn"></param>
+        /// <param name="sortDirection"></param>
+        /// <returns></returns>
         [Route("FindCars")]
         [HttpGet]
         public async Task<IHttpActionResult> FindCars(string year, string make, string model, string trim, string filter, bool? paging, int? page, int? perPage, string sortColumn, string sortDirection) {
