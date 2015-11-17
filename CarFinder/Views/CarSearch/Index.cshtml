@@ -1,0 +1,85 @@
+﻿@model IEnumerable<CarFinder.Models.Car>
+
+@{
+    ViewBag.Title = "Car Search";
+}
+
+<h2>Car Search</h2>
+
+<form method="post" id="form" action="@Url.Action("Index","CarSearch")">
+    <div>
+        <div>Years</div>
+        @Html.DropDownList("year", null, htmlAttributes: new { @id = "yearList" })
+    </div>
+
+    @if (ViewBag.Make != null) {
+        <div>
+            <div>Make</div>
+            @Html.DropDownList("make", null, htmlAttributes: new { @id = "makeList" })
+        </div>
+    }
+    @if (ViewBag.Model != null) {
+        <div>
+            <div>Model</div>
+            @Html.DropDownList("model", null, htmlAttributes: new { @id = "modelList" })
+        </div>
+    }
+    @if (ViewBag.Trim != null) {
+        <div>
+            <div>Trim</div>
+            @Html.DropDownList("trim", null, htmlAttributes: new { @id = "trimList" })
+        </div>
+    }
+</form>
+
+<table id="years">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.model_year)</th>
+            <th>@Html.DisplayNameFor(m => m.make)</th>
+            <th>@Html.DisplayNameFor(m => m.model_name)</th>
+            <th>@Html.DisplayNameFor(m => m.model_trim)</th>
+            <th>@Html.DisplayNameFor(m => m.body_style)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model) {
+            <tr>
+                <td>@car.model_year</td>
+                <td>@car.make</td>
+                <td>@car.model_year</td>
+                <td>@car.model_trim</td>
+                <td>@car.body_style</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var year, make, model, trim;
+            $('#yearList').change(function () {
+                $('#makeList').empty();
+                $('#modelList').empty();
+                $('#trimList').empty();
+                $('#form').submit();
+            });
+            var year, make, model, trim;
+            $('#makeList').change(function () {
+                $('#modelList').empty();
+                $('#trimList').empty();
+                $('#form').submit();
+            });
+            var year, make, model, trim;
+            $('#modelList').change(function () {
+                $('#trimList').empty();
+                $('#form').submit();
+            });
+            var year, make, model, trim;
+            $('#trimList').change(function () {
+                $('#form').submit();
+            });
+        });
+    </script>
+}

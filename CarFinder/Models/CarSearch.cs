@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 
 namespace CarFinder.Models {
-    public class CarsByYMM {
+    public class CarSearch {
 
-        public CarsByYMM() {
+        public CarSearch() {
             this.Cars = new HashSet<Car>();
             //this.Comments = new HashSet<TicketCommentsModel>();
             //this.History = new HashSet<TicketHistoriesModel>();
@@ -17,6 +17,7 @@ namespace CarFinder.Models {
         public string model_year { get; set; }
         public string make { get; set; }
         public string model_name { get; set; }
+        public string model_trim { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; }
 

@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Web;
 
 namespace CarFinder.Models {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
@@ -97,5 +98,9 @@ namespace CarFinder.Models {
         public static ApplicationDbContext Create() {
             return new ApplicationDbContext();
         }
+
+        //internal Task<object> FindCars(string year, string make, string model, string trim, string p1, bool p2, int p3, int p4) {
+        //    throw new System.NotImplementedException();
+        //}
     }
 }

@@ -1,5 +1,6 @@
 namespace CarFinder.Models {
     using System;
+    using System.Web;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -10,18 +11,23 @@ namespace CarFinder.Models {
         public int id { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Make")]
         public string make { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Model")]
         public string model_name { get; set; }
 
         [StringLength(128)]
+        [Display(Name = "Trim")]
         public string model_trim { get; set; }
 
         [StringLength(10)]
+        [Display(Name = "Year")]
         public string model_year { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Body Style")]
         public string body_style { get; set; }
 
         [StringLength(50)]
