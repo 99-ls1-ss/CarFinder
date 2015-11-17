@@ -90,8 +90,8 @@ namespace CarFinder.Models {
                 yearParam, makeParam, modelParam, trimParam, filterParam, pagingParam, pageParam, perPageParam, sortColumnParam, sortDirectionParam).ToListAsync();
         }
 
-        public async Task<List<Car>> Cars_by_Id(int id) {
-            var idParam = new SqlParameter("@Id", id);
+        public async Task<List<Car>> Cars_by_Id(int? id) {
+            var idParam = new SqlParameter("@Id", id ?? 1);
             return await this.Database.SqlQuery<Car>("Cars_by_Id @Id", idParam).ToListAsync();
         }
 

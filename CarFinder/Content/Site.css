@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.inline-dropdown {
+    margin-bottom:20px;
+}
+
+.inline-dropdown div, .inline-dropdown select{
+    display:inline;
+}
