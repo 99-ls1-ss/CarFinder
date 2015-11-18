@@ -40,8 +40,6 @@ namespace CarFinder.Controllers {
         public async Task<ActionResult> Details(int id) {
 
             CarSearch car = new CarSearch();
-
-
             car.Car = db.Car.Find(id);
             
 

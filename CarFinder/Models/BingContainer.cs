@@ -18,6 +18,7 @@ namespace Bing {
     using System.Data.Services.Client;
     using System.Net;
     using System.IO;
+    using System.ComponentModel.DataAnnotations;
 
 
     public partial class ExpandableSearchResult {
@@ -473,6 +474,7 @@ namespace Bing {
 
         private String _Description;
 
+        [DisplayFormat(DataFormatString = "{0:MMM dd yyyy}")]
         private DateTime? _Date;
 
         public Guid ID {
@@ -520,6 +522,7 @@ namespace Bing {
             }
         }
 
+        [DisplayFormat(DataFormatString = "{0:MMM dd yyyy}")]
         public DateTime? Date {
             get {
                 return this._Date;
