@@ -30,3 +30,24 @@ textarea {
 .inline-dropdown div, .inline-dropdown select{
     display:inline;
 }
+
+.recall-img {
+    max-width:400px;
+    min-width:200px;
+    border:2px solid #2e3534;
+}
+
+.car-info{
+
+}
+.car-info label {
+    margin-right:6px;
+}
+
+.car-recall-info {
+
+}
+
+.car-recall-info label, .car-recall-info div {
+    display:inline;
+}

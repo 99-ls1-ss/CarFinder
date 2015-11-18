@@ -1,13 +1,27 @@
-﻿@model CarFinder.Models.Car
+﻿@model CarFinder.Models.CarSearch
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
-
-<div>@Model.model_year</div>
-<div>@Model.make</div>
-<div>@Model.model_name</div>
-<div>@Model.model_trim</div>
-<div>@Model.body_style</div>
-<div></div>
+<div class="car-info">
+    <div><label>Year: </label>@Model.Car.model_year</div>
+    <div><label>Make:</label>@Model.Car.make</div>
+    <div><label>Model: </label>@Model.Car.model_name</div>
+    <div><label>Trim: </label>@Model.Car.model_trim</div>
+    <div><label>Body Style: </label>@Model.Car.body_style</div>
+    <div><label>Image: </label><img class="img-responsive recall-img" src="@Model.ImageUrl" /></div>
+    <div><label>Recall Count: </label>@Model.Recalls.Count</div>
+</div>
+@foreach (var recall in Model.Recalls.Results) {
+    <div class="car-recall-info">
+        <div><label>Date Reported: </label><div>@recall.ReportReceivedDate</div></div><br />
+        <div><label>Defective Component: </label><div>@recall.Component</div></div><br />
+        <div><label>Issue: </label><div>@recall.Conequence</div></div><br />
+        <div><label>Summary: </label><div>@recall.Summary</div></div><br />
+        <div><label>Remedy: </label><div>@recall.Remedy</div></div><br />
+        <div><label>Notes: </label><div>@recall.Notes</div></div><br />
+    </div>
+    <hr />
+}
+@*<div>@Model.Recalls</div>*@
