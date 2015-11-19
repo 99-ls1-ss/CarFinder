@@ -1,0 +1,170 @@
+﻿@model IEnumerable<CarFinder.Models.Car>
+
+@{
+    ViewBag.Title = "Car Search";
+    ViewBag.Menu = "CarSearch2";
+}
+
+<section class="section colored-wrapper">
+    <div class="container">
+        <div class="wrapper-2">
+            <div class="row">
+                <div class="col-md-9 content-wrapper">
+                    <h4><span>@ViewBag.Title</span></h4>
+                </div>
+                <div class="col-md-3 text-right">
+                    <a href="@Url.Action("Index","CarSearch2")">Start New Search</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper-2">
+
+            <form method="post" id="form" class="carfinderForm" action="@Url.Action("Index","CarSearch2")">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-2 inline-dropdown">
+                            <div>Years</div><br />
+                            @Html.DropDownList("year", null, "Select Year", htmlAttributes: new { @id = "yearList" })
+                        </div>
+                        <div class="col-xs-12 col-md-3 inline-dropdown">
+                            <div>Make</div><br />
+                            @Html.DropDownList("make", null, "Select Make", htmlAttributes: new { @id = "makeList" })
+                        </div>
+                        <div class="col-xs-12 col-md-3 inline-dropdown">
+                            <div>Model</div><br />
+                            @Html.DropDownList("model", null, "Select Model", htmlAttributes: new { @id = "modelList" })
+                        </div>
+                        <div class="col-xs-12 col-md-4 inline-dropdown">
+                            <div>Trim</div><br />
+                            @Html.DropDownList("trim", null, "Select Trim", htmlAttributes: new { @id = "trimList" })
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <table id="carTable" class="carFinderTable table-responsive">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(m => m.model_year)</th>
+                        <th>@Html.DisplayNameFor(m => m.make)</th>
+                        <th>@Html.DisplayNameFor(m => m.model_name)</th>
+                        <th>@Html.DisplayNameFor(m => m.model_trim)</th>
+                        <th>@Html.DisplayNameFor(m => m.body_style)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*@foreach (var car in Model) {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                                @car.model_year
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                                @car.make
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                                @car.model_year
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                                @car.model_trim
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                                @car.body_style
+                                            </a>
+                                        </td>
+                                    </tr>
+                        }*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var year, make, model, trim;
+            $('#yearList').change(function () {
+                year = $('#yearList').val();
+                $('#makeList').empty();
+                $.getJSON('/CarSearch2/Make_by_Year', {year}, function (data) {
+                    $.each(data, function (i, obj) {
+                        //console.log(obj['Text']);
+                        $('#makeList').append(
+                            $('<option></option>').text(obj["Text"]));
+                    });
+                });
+                $('#modelList').empty();
+                $('#trimList').empty();
+                //$('#form').dataTable().api().draw();
+            });
+            var year, make, model, trim;
+            $('#makeList').change(function () {
+                make = $('#makeList').val();
+                $('#modelList').empty();
+                $.getJSON('/CarSearch2/Model_by_Year_Make',{year, make}, function(data) {
+                    $.each(data, function (i, obj) {
+                        //console.log(obj['Text']);
+                        $('#modelList').append(
+                            $('<option></option>').text(obj["Text"]));
+                    });
+                });
+                $('#trimList').empty();
+                //$('#form').dataTable().api().draw();
+            });
+            var year, make, model, trim;
+            $('#modelList').change(function () {
+                model = $('#modelList').val();
+                $('#trimList').empty();
+                $.getJSON('/CarSearch2/Trims_by_Year_Make_Model', { year, make, model }, function (data) {
+                    $.each(data, function (i, obj) {
+                        //console.log(obj['Text']);
+                        $('#trimList').append(
+                            $('<option></option>').text(obj["Text"]));
+                    });
+                });
+                //$('#form').dataTable().api().draw();
+            });
+            var year, make, model, trim;
+            $('#trimList').change(function () {
+                //$('#form').dataTable().api().draw();
+            });
+
+            $('#carTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/Cars1/GetCars",
+                    "type": "Post",
+                    "data": function (d) {
+                        d.year = $('#yearList').val();
+                        d.make = $('#makeList').val();
+                        d.model = $('#modelList').val();
+                        d.trim = $('#trimList').val();
+                    }
+                },
+                "columns": [
+                    { "data": "id", "visible": false },
+                    { "data": "make" },
+                    { "data": "model_name" },
+                    { "data": "model_trim" },
+                    { "data": "model_year" },
+                    { "data": "body_style" },
+                    { "data": "engine_num_cyl" },
+                    { "data": "engine_power_ps" },
+                    { "data": "drive_type" },
+                    { "data": "seats" }//,
+                    //{ "data": "link" }
+                ]
+            });
+        });
+    </script>
+}

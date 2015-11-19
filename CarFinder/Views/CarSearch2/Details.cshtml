@@ -1,0 +1,95 @@
+﻿@model CarFinder.Models.CarSearch
+@{
+    ViewBag.Title = "Car Details";
+    ViewBag.Menu = "CarSearch2";
+
+    float liters = float.Parse(Model.Car.engine_cc);
+    liters = liters / 1000;
+
+    float literToCid = float.Parse("0.0610237");
+    float kwToHp = float.Parse("0.7457");
+
+    float hp = float.Parse(Model.Car.engine_power_ps);
+    float cid = float.Parse(Model.Car.engine_cc);
+
+    hp = hp * kwToHp;
+    cid = cid * literToCid;
+
+}
+
+<section class="section colored-wrapper">
+    <div class="container">
+        <div class="wrapper-2">
+            <div class="row">
+                <div class="col-md-9 content-wrapper">
+                    <h4><span>@Model.Car.make @Model.Car.model_name @Model.Car.model_trim</span></h4>
+                </div>
+                <div class="col-md-3 text-right">
+                    <a href="#" onclick="window.history.back()">Back to Car List</a>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-2">
+            
+            <div class="car-info row">
+                <div class="col-xs-12 col-md-4">
+                    <div><label>Year: </label>@Model.Car.model_year</div>
+                    <div><label>Make:</label>@Model.Car.make</div>
+                    <div><label>Model: </label>@Model.Car.model_name</div>
+                    <div><label>Trim: </label>@Model.Car.model_trim</div>
+                    <div><label>Body Style: </label>@Model.Car.doors Door @Model.Car.body_style</div>
+                    <div><label>Engine Layout: </label>@Model.Car.engine_position Engine</div>
+                    <div><label>Engine Size: </label>@liters.ToString("0.0")<span>L</span>  (@cid.ToString("0")<span> Cubic Inches</span>)</div>
+                    <div><label>Engine Type: </label>@Model.Car.engine_type@Model.Car.engine_num_cyl</div>
+                    <div><label>Fuel Type: </label>@Model.Car.engine_fuel </div>
+                    <div><label>Drive Layout: </label>@Model.Car.drive_type</div>
+                    <div><label>Horsepower/RPM: </label>@Model.Car.engine_power_ps <span>@@</span> @Model.Car.engine_power_rpm <span>RPM</span></div>
+                    <div><label>Torque/RPM: </label>@Model.Car.engine_torque_nm <span>@@</span> @Model.Car.engine_torque_rpm <span>RPM</span></div>
+                    @if (Model.Recalls.Count == 0) {
+                        <div><label>Recall Count: </label>@Model.Recalls.Count</div>
+                    }
+                </div>
+                <div class="col-xs-12 col-md-8 text-center">
+                    <div><img class="img-responsive recall-img" src="@Model.ImageUrl" /></div>
+                </div>
+            </div>
+
+            @if (Model.Recalls.Count > 0) {
+                <hr />
+                <div id="tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tabs-1"> Recall 1</a></li>
+                        @for (var i = 2; i <= (int)Model.Recalls.Count; i++) {
+                            <li><a data-toggle="tab" href="#tabs-@(i)">Recall @(i)</a></li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    @{var tabContent = 1; var first = "";}
+                    @foreach (var recall in Model.Recalls.Results) {
+                        if (tabContent == 1) { first = "in active"; } else { first = ""; }
+                        <div id="tabs-@tabContent" class="car-recall-info tab-pane fade @first">
+                            <div class="recall-field"><label>Date Reported: </label><div>@recall.ReportReceivedDate</div></div>
+                            <div class="recall-field"><label>Defective Component: </label><div>@recall.Component</div></div>
+                            <div class="recall-field"><label>Issue: </label><div>@recall.Conequence</div></div>
+                            <div class="recall-field"><label>Summary: </label><div>@recall.Summary</div></div>
+                            <div class="recall-field"><label>Remedy: </label><div>@recall.Remedy</div></div>
+                            <div class="recall-field"><label>Notes: </label><div>@recall.Notes</div></div>
+                        </div>
+ { tabContent++; }
+                    }
+
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+        });
+    </script>
+}

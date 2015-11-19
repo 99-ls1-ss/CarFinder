@@ -32,8 +32,9 @@
                     </div>
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav">
-                            <li class=" @(ViewBag.Menu == "Home" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li class=" @(ViewBag.Menu == "CarSearch" ? "active" : "")">@Html.ActionLink("Car Search", "Index", "CarSearch")</li>
+                            <li class="@(ViewBag.Menu == "Home" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li class="@(ViewBag.Menu == "CarSearch" ? "active" : "")">@Html.ActionLink("Car Search", "Index", "CarSearch")</li>
+                            <li class="@(ViewBag.Menu == "CarSearch2" ? "active" : "")">@Html.ActionLink("AJAX Car Search", "Index", "CarSearch2")</li>
                         </ul>
                         @*@Html.Partial("_LoginPartial")*@
                     </div>
