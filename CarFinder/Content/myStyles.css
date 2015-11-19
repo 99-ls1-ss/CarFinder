@@ -484,7 +484,7 @@ textarea.form-control.comments {
     background-color:#E8E8E8;    
     margin-right: 4px;
 }
-/*
-.nav-tabs > li a {
-    color:#fff;
-}*/
+
+form.carfinderForm {
+    margin-bottom:14px;
+}

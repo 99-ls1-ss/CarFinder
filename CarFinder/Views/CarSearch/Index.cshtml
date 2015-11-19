@@ -12,39 +12,39 @@
                 <div class="col-md-9 content-wrapper">
                     <h4><span>@ViewBag.Title</span></h4>
                 </div>
-                @*<div class="col-md-3 text-right">
-                    @Html.ActionLink("Create New Ticket", "Create")
-                </div>*@
+                <div class="col-md-3 text-right">
+                    <a href="@Url.Action("Index","CarSearch")">Start New Search</a>
+                </div>
             </div>
         </div>
 
         <div class="wrapper-2">
 
 
-            <form method="post" id="form" action="@Url.Action("Index","CarSearch")">
+            <form method="post" id="form" class="carfinderForm" action="@Url.Action("Index","CarSearch")">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-md-2 inline-dropdown">
                             <div>Years</div><br />
-                            @Html.DropDownList("year", null, htmlAttributes: new { @id = "yearList" })
+                            @Html.DropDownList("year", null, "Select Year", htmlAttributes: new { @id = "yearList" })
                         </div>
 
                         @if (ViewBag.Make != null) {
                             <div class="col-xs-12 col-md-3 inline-dropdown">
                                 <div>Make</div><br />
-                                @Html.DropDownList("make", null, htmlAttributes: new { @id = "makeList" })
+                                @Html.DropDownList("make", null, "Select Make",htmlAttributes: new { @id = "makeList" })
                             </div>
                 }
                         @if (ViewBag.Model != null) {
                             <div class="col-xs-12 col-md-3 inline-dropdown">
                                 <div>Model</div><br />
-                                @Html.DropDownList("model", null, htmlAttributes: new { @id = "modelList" })
+                                @Html.DropDownList("model", null, "Select Model", htmlAttributes: new { @id = "modelList" })
                             </div>
                         }
                         @if (ViewBag.Trim != null) {
                             <div class="col-xs-12 col-md-4 inline-dropdown">
                                 <div>Trim</div><br />
-                                @Html.DropDownList("trim", null, htmlAttributes: new { @id = "trimList" })
+                                @Html.DropDownList("trim", null, "Select Trim", htmlAttributes: new { @id = "trimList" })
                             </div>
                         }
                     </div>
