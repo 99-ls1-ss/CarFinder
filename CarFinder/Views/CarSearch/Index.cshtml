@@ -2,84 +2,100 @@
 
 @{
     ViewBag.Title = "Car Search";
+    ViewBag.Menu = "CarSearch";
 }
 
-<h2>Car Search</h2>
-<section>
-    <form method="post" id="form" action="@Url.Action("Index","CarSearch")">
-        <div class="container">
+<section class="section colored-wrapper">
+    <div class="container">
+        <div class="wrapper-2">
             <div class="row">
-                <div class="col-md-3 inline-dropdown">
-                    <div>Years</div>
-                    @Html.DropDownList("year", null, htmlAttributes: new { @id = "yearList" })
+                <div class="col-md-9 content-wrapper">
+                    <h4><span>@ViewBag.Title</span></h4>
                 </div>
-
-                @if (ViewBag.Make != null) {
-                    <div class="col-md-3 inline-dropdown">
-                        <div>Make</div>
-                        @Html.DropDownList("make", null, htmlAttributes: new { @id = "makeList" })
-                    </div>
-                }
-                @if (ViewBag.Model != null) {
-                    <div class="col-md-3 inline-dropdown">
-                        <div>Model</div>
-                        @Html.DropDownList("model", null, htmlAttributes: new { @id = "modelList" })
-                    </div>
-                }
-                @if (ViewBag.Trim != null) {
-                    <div class="col-md-3 inline-dropdown">
-                        <div>Trim</div>
-                        @Html.DropDownList("trim", null, htmlAttributes: new { @id = "trimList" })
-                    </div>
-                }
+                @*<div class="col-md-3 text-right">
+                    @Html.ActionLink("Create New Ticket", "Create")
+                </div>*@
             </div>
         </div>
-    </form>
-</section>
-<section>
-    <table id="carTable">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(m => m.model_year)</th>
-                <th>@Html.DisplayNameFor(m => m.make)</th>
-                <th>@Html.DisplayNameFor(m => m.model_name)</th>
-                <th>@Html.DisplayNameFor(m => m.model_trim)</th>
-                <th>@Html.DisplayNameFor(m => m.body_style)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var car in Model) {
-                <tr>
-                    <td>
-                        <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                            @car.model_year
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                            @car.make
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                            @car.model_year
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                            @car.model_trim
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                            @car.body_style
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
 
-    </table>
+        <div class="wrapper-2">
+
+
+            <form method="post" id="form" action="@Url.Action("Index","CarSearch")">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3 inline-dropdown">
+                            <div>Years</div>
+                            @Html.DropDownList("year", null, htmlAttributes: new { @id = "yearList" })
+                        </div>
+
+                        @if (ViewBag.Make != null) {
+                            <div class="col-xs-12 col-md-3 inline-dropdown">
+                                <div>Make</div>
+                                @Html.DropDownList("make", null, htmlAttributes: new { @id = "makeList" })
+                            </div>
+                }
+                        @if (ViewBag.Model != null) {
+                            <div class="col-xs-12 col-md-3 inline-dropdown">
+                                <div>Model</div>
+                                @Html.DropDownList("model", null, htmlAttributes: new { @id = "modelList" })
+                            </div>
+                        }
+                        @if (ViewBag.Trim != null) {
+                            <div class="col-xs-12 col-md-3 inline-dropdown">
+                                <div>Trim</div>
+                                @Html.DropDownList("trim", null, htmlAttributes: new { @id = "trimList" })
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+
+            <table id="carTable" class="carFinderTable">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(m => m.model_year)</th>
+                        <th>@Html.DisplayNameFor(m => m.make)</th>
+                        <th>@Html.DisplayNameFor(m => m.model_name)</th>
+                        <th>@Html.DisplayNameFor(m => m.model_trim)</th>
+                        <th>@Html.DisplayNameFor(m => m.body_style)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var car in Model) {
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                    @car.model_year
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                    @car.make
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                    @car.model_year
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                    @car.model_trim
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
+                                    @car.body_style
+                                </a>
+                            </td>
+                        </tr>
+            }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
 </section>
 @section scripts{
     <script>

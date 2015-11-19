@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,46 +23,47 @@ textarea {
     max-width: 280px;
 }
 
-.inline-dropdown {
-    margin-bottom:20px;
+.user-header-row {
+    margin-bottom:2em;
+    border-bottom: 1px solid #eee;
 }
 
-.inline-dropdown div, .inline-dropdown select{
-    display:inline;
+.user-row:nth-child(even) {
+    background-color:aliceblue;
 }
 
-.recall-img {
-    max-width:450px;
-    border:2px solid #2e3534;
-    box-shadow: 5px 4px 9px 0px rgba(142, 142, 142, 1);
+#SelectedUsers{
+    min-height:110px;
+    max-height: 150px;
 }
 
-.car-info{
-    padding-bottom:16px;
+textarea.ticket-textarea, input.ticket-input, select.ticket-select, input#attachmentEditDescriptionId, input#attachmentEditUrl, input#fileUploadEdit,
+input#attachmentDeleteDescription,input#attachmentDeleteUrl, textarea#commentUpdateBodyId, textarea#commentRemoveBodyId{
+    max-width:100%;
 }
 
-.car-info label, .car-recall-info label {
-    margin-right:6px;
+textarea.attachmentDescription, input.attachmentFileUrl {
+    max-width:100%;
+    /*min-height:100px;*/
 }
 
-.car-recall-info label, .car-recall-info div {
-    display:inline;
+.attachmentHeight {
+    min-height:121px;
 }
 
-.car-recall-info {
-    padding:12px;
+input.attachmentFileUrl{
+    border:0;
 }
 
-.tab-content {
-    border-left: 1px solid #dddddd;
-    border-right: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-    border-bottom-left-radius:4px;
-    border-bottom-right-radius:4px;
+.display-for-padding {
+    padding-top:7px;
 }
 
-.car-recall-info > .recall-field {
-    width:100%;
-    display:inline-block;
-    margin-bottom:5px;
+.subText {
+    font-size: .75em;
+}
+
+.modal.in .modal-dialog {
+    background-color:#fff;
+    margin-top: 40px;
 }
