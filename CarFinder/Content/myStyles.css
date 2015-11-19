@@ -311,7 +311,7 @@ input.btn{
 }*/
 
 .home-landing {
-    min-height:600px;
+    /*min-height:600px;*/
     text-align:center;
 }
 
@@ -351,11 +351,11 @@ textarea.form-control.comments {
 }
 .tab-content {
     background-color:#fff;
-    border-left: 1px solid #dddddd;
-    border-right: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-    border-bottom-left-radius:4px;
-    border-bottom-right-radius:4px;
+    border-left: 1px solid #ecf0f1;
+    border-right: 1px solid #ecf0f1;
+    border-bottom: 1px solid #ecf0f1;
+    border-bottom-left-radius:8px;
+    border-bottom-right-radius:8px;
 }
 
 #historyTab .media-body p {
@@ -445,7 +445,7 @@ textarea.form-control.comments {
 }
 
 .recall-img {
-    max-width:450px;
+    max-width:500px;
     border:2px solid #2e3534;
     box-shadow: 5px 4px 9px 0px rgba(142, 142, 142, 1);
 }
@@ -456,6 +456,8 @@ textarea.form-control.comments {
 
 .car-info label, .car-recall-info label {
     margin-right:6px;
+    color:#616161;
+    font-weight: 700;
 }
 
 .car-recall-info label, .car-recall-info div {
@@ -472,3 +474,17 @@ textarea.form-control.comments {
     margin-bottom:5px;
 }
 
+.nav-tabs > li.active {
+    margin-left: 1px;
+    background-color:#fff;
+    color:#f80a0a;
+}
+
+.nav-tabs > li {
+    background-color:#E8E8E8;    
+    margin-right: 4px;
+}
+/*
+.nav-tabs > li a {
+    color:#fff;
+}*/

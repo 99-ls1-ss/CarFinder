@@ -66,7 +66,7 @@ namespace CarFinder.Controllers {
             var result = marketData.FirstOrDefault();
             var image = result != null ? result.Image : null;
             var firstImage = image != null ? image.FirstOrDefault() : null;
-             car.ImageUrl = firstImage != null ? firstImage.MediaUrl : "~/Images/img_not_found.jpg";
+             car.ImageUrl = firstImage != null ? firstImage.MediaUrl : "/Images/img_not_found.jpg";
 
             //dynamic recalls;
 

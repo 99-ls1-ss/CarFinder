@@ -551,6 +551,8 @@
     <Content Include="assets\font-awesome\scss\_mixins.scss" />
     <Content Include="assets\font-awesome\scss\_path.scss" />
     <Content Include="assets\font-awesome\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\brandonpayne-carfinder - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\brandonpayne-carfinder - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
