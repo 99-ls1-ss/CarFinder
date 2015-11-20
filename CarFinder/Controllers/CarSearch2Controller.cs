@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Linq;
 using System.Web.Http;
+using DataTables.Mvc;
 
 namespace CarFinder.Controllers {
     public class CarSearch2Controller : Controller {
@@ -51,6 +52,40 @@ namespace CarFinder.Controllers {
         public async Task<ActionResult> Trims_by_Year_Make_Model(string year, string make, string model) {
             var trim = new SelectList(await db.Trims_by_Year_Make_Model(year, make, model));
             return Content(JsonConvert.SerializeObject(trim), "application/json");
+        }
+        
+        public async Task<JsonResult> GetCars([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest request,
+           string year = "2015", string make = "", string model = "", string trim = "") {
+
+            var filter = request.Search.Value;
+            var totalCount =  await db.Count_Cars_Year_Make_Model_Trim_Filter(year, make, model, trim, filter);
+            var column = request.Columns.FirstOrDefault(r => r.IsOrdered == true);
+            var sortColumn = "";
+            var sortDirection = "asc";
+            if (column != null) {
+                sortColumn = column.Data;
+                if (column.SortDirection == Column.OrderDirection.Descendant) {
+                    sortDirection = "Desc";
+                }
+            }
+            List<Car> cars = new List<Car>();
+            cars = await db.FindCars(year, make, model, trim, filter, true, ((request.Start / request.Length) + 1), request.Length, sortColumn, sortDirection);
+
+            var paged = cars.Select(c =>
+            new Car {
+                id = + c.id,
+                make = "<a href=\"/CarsSearch2/Details/" + c.make + "\">" + c.make + "</a>",
+                model_name = "<a href=\"/CarsSearch2/Details/" + c.model_name + "\">" + c.model_name + "</a>",
+                model_trim = "<a href=\"/CarsSearch2/Details/" + c.model_trim + "\">" + c.model_trim + "</a>",
+                model_year = "<a href=\"/CarsSearch2/Details/" + c.model_year + "\">" + c.model_year + "</a>",
+                body_style = "<a href=\"/CarsSearch2/Details/" + c.body_style + "\">" + c.body_style + "</a>",
+                engine_num_cyl = "<a href=\"/CarsSearch2/Details/" + c.engine_num_cyl + "\">" + c.engine_num_cyl + "</a>",
+                engine_power_ps = "<a href=\"/CarsSearch2/Details/" + c.engine_power_ps + "\">" + c.engine_power_ps + "</a>",
+                drive_type = "<a href=\"/CarsSearch2/Details/" + c.drive_type + "\">" + c.drive_type + "</a>",
+                seats = "<a href=\"/CarsSearch2/Details/" + c.seats + "\">" + c.seats + "</a>"
+            });
+            return Json(new DataTablesResponse(request.Draw, paged,request.Length ,Convert.ToInt32(totalCount)),
+               JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult> Details(int id) {

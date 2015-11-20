@@ -43,128 +43,98 @@
                 </div>
             </form>
 
-            <table id="carTable" class="carFinderTable table-responsive">
+            <table id="carTable2">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(m => m.model_year)</th>
-                        <th>@Html.DisplayNameFor(m => m.make)</th>
-                        <th>@Html.DisplayNameFor(m => m.model_name)</th>
-                        <th>@Html.DisplayNameFor(m => m.model_trim)</th>
-                        <th>@Html.DisplayNameFor(m => m.body_style)</th>
+                        <th>ID</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Trim</th>
+                        <th>Year</th>
+                        <th>Body Style</th>
+                        <th>Num Cyl</th>
+                        <th>HP</th>
+                        <th>Drive Type</th>
+                        <th>Seats</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @*@foreach (var car in Model) {
-                                    <tr>
-                                        <td>
-                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                                                @car.model_year
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                                                @car.make
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                                                @car.model_year
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                                                @car.model_trim
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("Details", "CarSearch", new { id = car.id })">
-                                                @car.body_style
-                                            </a>
-                                        </td>
-                                    </tr>
-                        }*@
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
 </section>
 @section scripts{
     <script>
-        $(document).ready(function () {
-            var year, make, model, trim;
-            $('#yearList').change(function () {
-                year = $('#yearList').val();
-                $('#makeList').empty();
-                $.getJSON('/CarSearch2/Make_by_Year', {year}, function (data) {
-                    $.each(data, function (i, obj) {
-                        //console.log(obj['Text']);
-                        $('#makeList').append(
-                            $('<option></option>').text(obj["Text"]));
-                    });
+        var year, make, model, trim;
+        $('#yearList').change(function () {
+            year = $('#yearList').val();
+            $('#makeList').empty();
+            $.getJSON('/CarSearch2/Make_by_Year', {year}, function (data) {
+                $.each(data, function (i, obj) {
+                    $('#makeList').append(
+                        $('<option></option>').text(obj["Text"]));
                 });
-                $('#modelList').empty();
-                $('#trimList').empty();
-                //$('#form').dataTable().api().draw();
             });
-            var year, make, model, trim;
-            $('#makeList').change(function () {
-                make = $('#makeList').val();
-                $('#modelList').empty();
-                $.getJSON('/CarSearch2/Model_by_Year_Make',{year, make}, function(data) {
-                    $.each(data, function (i, obj) {
-                        //console.log(obj['Text']);
-                        $('#modelList').append(
-                            $('<option></option>').text(obj["Text"]));
-                    });
-                });
-                $('#trimList').empty();
-                //$('#form').dataTable().api().draw();
-            });
-            var year, make, model, trim;
-            $('#modelList').change(function () {
-                model = $('#modelList').val();
-                $('#trimList').empty();
-                $.getJSON('/CarSearch2/Trims_by_Year_Make_Model', { year, make, model }, function (data) {
-                    $.each(data, function (i, obj) {
-                        //console.log(obj['Text']);
-                        $('#trimList').append(
-                            $('<option></option>').text(obj["Text"]));
-                    });
-                });
-                //$('#form').dataTable().api().draw();
-            });
-            var year, make, model, trim;
-            $('#trimList').change(function () {
-                //$('#form').dataTable().api().draw();
-            });
+            $('#modelList').empty();
+            $('#trimList').empty();
+            $('#carTable2').dataTable().api().draw();
+        });
 
-            $('#carTable').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": {
-                    "url": "/Cars1/GetCars",
-                    "type": "Post",
-                    "data": function (d) {
-                        d.year = $('#yearList').val();
-                        d.make = $('#makeList').val();
-                        d.model = $('#modelList').val();
-                        d.trim = $('#trimList').val();
-                    }
-                },
-                "columns": [
-                    { "data": "id", "visible": false },
-                    { "data": "make" },
-                    { "data": "model_name" },
-                    { "data": "model_trim" },
-                    { "data": "model_year" },
-                    { "data": "body_style" },
-                    { "data": "engine_num_cyl" },
-                    { "data": "engine_power_ps" },
-                    { "data": "drive_type" },
-                    { "data": "seats" }//,
-                    //{ "data": "link" }
-                ]
+        $('#makeList').change(function () {
+            make = $('#makeList').val();
+            $('#modelList').empty();
+            $.getJSON('/CarSearch2/Model_by_Year_Make',{year, make}, function(data) {
+                $.each(data, function (i, obj) {
+                    $('#modelList').append(
+                        $('<option></option>').text(obj["Text"]));
+                });
             });
+            $('#trimList').empty();
+            $('#carTable2').dataTable().api().draw();
+        });
+
+        $('#modelList').change(function () {
+            model = $('#modelList').val();
+            $('#trimList').empty();
+            $.getJSON('/CarSearch2/Trims_by_Year_Make_Model', { year, make, model }, function (data) {
+                $.each(data, function (i, obj) {
+                    $('#trimList').append(
+                        $('<option></option>').text(obj["Text"]));
+                });
+            });
+            $('#carTable2').dataTable().api().draw();
+        });
+
+        $('#trimList').change(function () {
+            $('#carTable2').dataTable().api().draw();
+        });
+            
+
+        $('#carTable2').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "/CarSearch2/GetCars",
+                "type": "Post",
+                "data": function (d) {
+                    d.year = $('#yearList').val();
+                    d.make = $('#makeList').val();
+                    d.model = $('#modelList').val();
+                    d.trim = $('#trimList').val();
+                }
+            },
+            "columns": [
+                { "data": "id", "visible": false },
+                { "data": "make" },
+                { "data": "model_name" },
+                { "data": "model_trim" },
+                { "data": "model_year" },
+                { "data": "body_style" },
+                { "data": "engine_num_cyl" },
+                { "data": "engine_power_ps" },
+                { "data": "drive_type" },
+                { "data": "seats" }
+            ]
         });
     </script>
 }
