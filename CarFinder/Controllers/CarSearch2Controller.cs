@@ -74,15 +74,15 @@ namespace CarFinder.Controllers {
             var paged = cars.Select(c =>
             new Car {
                 id = + c.id,
-                make = "<a href=\"/CarsSearch2/Details/" + c.make + "\">" + c.make + "</a>",
-                model_name = "<a href=\"/CarsSearch2/Details/" + c.model_name + "\">" + c.model_name + "</a>",
-                model_trim = "<a href=\"/CarsSearch2/Details/" + c.model_trim + "\">" + c.model_trim + "</a>",
-                model_year = "<a href=\"/CarsSearch2/Details/" + c.model_year + "\">" + c.model_year + "</a>",
-                body_style = "<a href=\"/CarsSearch2/Details/" + c.body_style + "\">" + c.body_style + "</a>",
-                engine_num_cyl = "<a href=\"/CarsSearch2/Details/" + c.engine_num_cyl + "\">" + c.engine_num_cyl + "</a>",
-                engine_power_ps = "<a href=\"/CarsSearch2/Details/" + c.engine_power_ps + "\">" + c.engine_power_ps + "</a>",
-                drive_type = "<a href=\"/CarsSearch2/Details/" + c.drive_type + "\">" + c.drive_type + "</a>",
-                seats = "<a href=\"/CarsSearch2/Details/" + c.seats + "\">" + c.seats + "</a>"
+                make = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.make + "</a>",
+                model_name = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.model_name + "</a>",
+                model_trim = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.model_trim + "</a>",
+                model_year = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.model_year + "</a>",
+                body_style = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.body_style + "</a>",
+                engine_num_cyl = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.engine_num_cyl + "</a>",
+                engine_power_ps = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.engine_power_ps + "</a>",
+                drive_type = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.drive_type + "</a>",
+                seats = "<a href=\"/CarSearch/Details/" + c.id + "\">" + c.seats + "</a>"
             });
             return Json(new DataTablesResponse(request.Draw, paged,request.Length ,Convert.ToInt32(totalCount)),
                JsonRequestBehavior.AllowGet);

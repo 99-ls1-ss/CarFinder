@@ -82,22 +82,6 @@ namespace CarFinder.Models {
             var result = await this.Database.SqlQuery<int>("Count_Cars_Year_Make_Model_Trim_Filter @model_year, @make, @model_name, @model_trim, @filter",
                 yearParam, makeParam, modelParam, trimParam, filterParam).FirstAsync();
             return result;
-
-            //var yearParam = new SqlParameter("@model_year", year);
-            //var makeParam = new SqlParameter("@make", make ?? "");
-            //var modelParam = new SqlParameter("@model_name", model ?? "");
-            //var trimParam = new SqlParameter("@model_trim", trim ?? "");
-            //var filterParam = new SqlParameter("@filter", filter ?? "");
-            //var pagingParam = new SqlParameter("@paging", false);
-            //var pageParam = new SqlParameter("@page", 0);
-            //var perPageParam = new SqlParameter("@perPage", 213000000);
-            //var sortColumnParam = new SqlParameter("@sortColumn", "");
-            //var sortDirectionParam = new SqlParameter("@sortDirection", "");
-
-            //var result = await this.Database.SqlQuery<Car>(
-            //    "FindCars @model_year, @make, @model_name, @model_trim, @filter, @paging, @page, @perPage, @sortColumn, @sortDirection",
-            //    yearParam, makeParam, modelParam, trimParam, filterParam, pagingParam, pageParam, perPageParam, sortColumnParam, sortDirectionParam).CountAsync();
-            //return result;
         }
 
         public async Task<List<Car>> FindCars(string year, string make, string model, string trim, string filter, bool? paging, int? page, int? perPage, string sortColumn, string sortDirection) {
