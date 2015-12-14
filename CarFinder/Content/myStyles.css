@@ -298,6 +298,19 @@ input.btn{
     margin: 8px 0 -2px;
 }
 
+.carFinder-landing-bg-wrapper {
+    padding:6px;
+    background-color:rgba(255, 255, 255, 0.84);
+    border-radius:6px;
+    -webkit-box-shadow: 2px 2px 8px 1px rgba(2, 2, 2, 0.62);
+    -moz-box-shadow: 2px 2px 8px 1px rgba(2, 2, 2, 0.62);
+    box-shadow: 2px 2px 8px 1px rgba(2, 2, 2, 0.62);
+}
+
+.carFinder-landing-bg-wrapper h2 {
+    margin: 0 0 0 0;
+    text-align:center;
+}
 
 /*----------  Datatables ------------*/
 
@@ -316,15 +329,13 @@ input.btn{
 }
 
 .landing-page {
-    background-image:url('images/blue-beach-vw-beetle-wallpaper.png');
-    background-position:bottom center;
-    background-repeat:no-repeat;
-    background-size:contain;
-    min-height:575px;
-    height:100%;
-    vertical-align:middle;
-    /*width: 116%;
-    margin: 0 -8%;*/
+    background-image: url('../Images/fbomb2.jpg');
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 550px;
+    /*height: 100%;*/
+    vertical-align: middle;
 }
 
 .ticket-description {
